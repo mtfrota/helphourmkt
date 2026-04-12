@@ -8,11 +8,11 @@ export const positioning = {
     "Ajudamos negócios locais a atrair mais clientes todos os dias com tráfego pago e presença digital.",
   primaryCta: {
     label: "Fale conosco",
-    href: "/contato",
+    href: "/helphour/contato",
   },
   secondaryCta: {
     label: "Nossos serviços",
-    href: "/servicos",
+    href: "/helphour/servicos",
   },
   hero: {
     headline: "Mais clientes todos os dias para o seu negócio local.",

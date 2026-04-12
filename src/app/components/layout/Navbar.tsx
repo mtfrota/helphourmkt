@@ -1,32 +1,30 @@
-﻿"use client";
+"use client";
 
-import Image from "next/image";
-import { useRef } from "react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import animationData from "@/animations/waveanimation.json";
+import sendAnimation from "@/animations/send.json";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import Lottie from "lottie-react";
-import sendAnimation from "src/animations/send.json";
-import animationData from "src/animations/waveanimation.json";
+import Lottie, { type LottieRefCurrentProps } from "lottie-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 const WHATSAPP_URL = "https://wa.me/5585990000000";
 
 const links = [
-  { label: "Início", href: "#hero" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Serviços", href: "/helphour/servicos" },
-  { label: "Processo", href: "#processo" },
-  { label: "Portfólio", href: "#portfolio" },
-  { label: "Vídeos", href: "#videos" },
-  { label: "Contato", href: "#contato" },
+  { label: "Início", href: "/helphour/#hero" },
+  { label: "Sobre", href: "/helphour/#sobre" },
+  { label: "Serviços", href: "#servicos" },
+  { label: "Processo", href: "/helphour/#processo" },
+  { label: "Portfólio", href: "/helphour/portfolio" },
+  { label: "Contato", href: "/helphour/#contato" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [play, setPlay] = useState(false);
-  const lottieRef = useRef<any>(null);
+  const lottieRef = useRef<LottieRefCurrentProps | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -43,111 +41,91 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   useEffect(() => {
-  let timeout: NodeJS.Timeout;
+    let timeout: NodeJS.Timeout;
 
-  const playLoop = () => {
-    if (!lottieRef.current) return;
+    const playLoop = () => {
+      if (!lottieRef.current) return;
 
-    lottieRef.current.stop();
-    lottieRef.current.play();
+      lottieRef.current.stop();
+      lottieRef.current.play();
 
-    timeout = setTimeout(() => {
-      playLoop();
-    }, 5000); // tempo total (animação + pausa)
-  };
+      timeout = setTimeout(() => {
+        playLoop();
+      }, 5000);
+    };
 
-  playLoop();
-
-  return () => clearTimeout(timeout);
-}, []);
-
+    playLoop();
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/20 backdrop-blur-xl shadow-md py-2"
-          : "bg-white/10 backdrop-blur-xl py-5"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-white/20 py-2 shadow-md backdrop-blur-xl" : "bg-white/10 py-3 sm:py-4 backdrop-blur-xl"
       }`}
     >
-      <nav className="max-w-5xl mx-auto flex items-center justify-between px-4">
-        {/* LOGO */}
-        <Link href="#hero" className="relative flex items-center px-4 py-2">
-      
-            {/* 🔵 ANIMAÇÃO (FUNDO) */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div
-                className={`transition-all duration-300 ${
-                  scrolled ? "w-20 h-20" : "w-40 h-40"
-                }`}
-              >
-                <Lottie animationData={animationData} loop autoplay />
-              </div>
+      <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 sm:px-6">
+        <Link href="/helphour/#hero" className="relative flex items-center py-1 pr-2">
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+            <div className={`transition-all duration-300 ${scrolled ? "h-16 w-16 sm:h-20 sm:w-20" : "h-24 w-24 sm:h-32 sm:w-32"}`}>
+              <Lottie animationData={animationData} loop autoplay />
             </div>
+          </div>
 
-            {/* ⚪ LOGO (FRENTE) */}
-            <Image
-              src="/logo.svg"
-              alt="Help Hour MKT"
-              width={200}
-              height={80}
-              priority
-              className={`relative z-10 transition-all duration-300 origin-left ${
-                scrolled ? "h-12" : "h-28"
-              } w-auto`}
-            />
+          <Image
+            src="/logo.svg"
+            alt="Help Hour MKT"
+            width={200}
+            height={80}
+            priority
+            className={`relative z-10 w-auto origin-left transition-all duration-300 ${scrolled ? "h-10 sm:h-12" : "h-14 sm:h-20"}`}
+          />
         </Link>
 
-        {/* MENU DESKTOP */}
-        <ul className="hidden lg:flex gap-6 text-[14px] font-medium text-white">
+        <ul
+          className={`hidden gap-8 text-[18px] font-medium leading-[28px] transition-colors duration-300 lg:flex ${
+            scrolled ? "text-[#2b0f40]" : "text-white"
+          }`}
+        >
           {links.map((link) => (
             <li key={link.href}>
-              <Link
-                href={link.href}
-                className="relative group inline-block transition-all duration-300 hover:scale-110"
-              >
-                <span className="relative z-10 [text-shadow:1px_1px_0_#000,-1px_1px_0_#000,1px_-1px_0_#000,-1px_-1px_0_#000]">
+              <Link href={link.href} className="group relative inline-flex items-center py-1">
+                <span
+                  className={`relative z-10 transition-colors duration-300 ${
+                    scrolled ? "text-[#2b0f40]" : "text-white [text-shadow:1px_1px_2px_rgba(0,0,0,0.6)]"
+                  } group-hover:text-[#e0b845]`}
+                >
                   {link.label}
                 </span>
-
-                <span className="absolute left-0 bottom-0 h-0.5 w-0 bg-[#e0b845] transition-all duration-300 group-hover:w-full" />
-
-                <span className="absolute inset-0 rounded-md opacity-0 group-hover:opacity-100 bg-[#e0b845]/10 blur-md transition" />
+                <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#e0b845] transition-all duration-500 ease-out group-hover:w-full" />
               </Link>
             </li>
           ))}
         </ul>
 
-        {/* CTA DESKTOP */}
         <a
           href={WHATSAPP_URL}
           target="_blank"
           rel="noreferrer"
           onMouseEnter={() => setPlay(true)}
           onMouseLeave={() => setPlay(false)}
-          className=" group hidden lg:inline-flex items-center gap-2 bg-[#e0b845] text-[#2b0f40] px-5 py-2 rounded-full font-bold text-sm shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg"
+          className="group hidden items-center gap-2 rounded-full bg-[#e0b845] px-5 py-2 text-sm font-bold text-[#2b0f40] shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg lg:inline-flex"
         >
           <span>Fale conosco</span>
-
-          <div className="w-6 h-6">
-            <Lottie
-              lottieRef={lottieRef}
-              animationData={sendAnimation}
-              loop={false}
-            />
+          <div className="h-6 w-6">
+            <Lottie lottieRef={lottieRef} animationData={sendAnimation} loop={false} />
           </div>
         </a>
 
-        {/* BOTÃO MOBILE */}
         <button
-          onClick={() => setMobileOpen((v) => !v)}
-          className="lg:hidden bg-[#2b0f40]/80 backdrop-blur-md p-2 rounded-full shadow-lg border border-white/20"
+          onClick={() => setMobileOpen((value) => !value)}
+          aria-label="Abrir menu"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#2b0f40]/70 backdrop-blur-md transition-all duration-300 active:scale-95 lg:hidden"
         >
-          {mobileOpen ? <X color="#fff" /> : <Menu color="#fff" />}
+          <span className="text-white transition-transform duration-300">{mobileOpen ? <X size={20} /> : <Menu size={20} />}</span>
         </button>
       </nav>
 
-      {/* MOBILE MENU */}
       <AnimatePresence>
         {mobileOpen && (
           <>
@@ -155,47 +133,43 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 z-40"
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
               onClick={() => setMobileOpen(false)}
             />
 
             <motion.div
-              initial={{ y: -50, opacity: 0 }}
+              initial={{ y: -30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -50, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="absolute top-full inset-x-0 bg-[#2b0f40]/95 backdrop-blur-xl z-50 p-5 rounded-b-2xl shadow-2xl"
+              exit={{ y: -30, opacity: 0 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="absolute inset-x-0 top-full z-50 rounded-b-2xl border-t border-white/10 bg-[#2b0f40]/95 px-4 py-6 shadow-xl backdrop-blur-xl sm:px-6"
             >
-              <ul className="flex flex-col gap-3">
+              <ul className="mx-auto flex w-full max-w-6xl flex-col gap-2">
                 {links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block p-3 rounded-lg bg-white/10 text-white font-medium transition-all duration-300 hover:bg-[#e0b845] hover:text-[#2b0f40] hover:scale-[1.03]"
+                      className="group flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium text-white transition-all duration-300 active:scale-[0.98]"
                     >
-                      {link.label}
+                      <span className="transition-colors duration-300 group-hover:text-[#e0b845]">{link.label}</span>
+                      <span className="h-2 w-2 rounded-full bg-[#e0b845] opacity-0 transition-all duration-300 group-hover:opacity-100" />
                     </Link>
                   </li>
                 ))}
               </ul>
 
-              {/* CTA MOBILE */}
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noreferrer"
                 onTouchStart={() => setPlay(true)}
-                className="mt-5 flex items-center justify-center gap-2 bg-[#e0b845] text-[#2b0f40] py-3 rounded-xl font-bold text-lg shadow-lg transition-all duration-300 active:scale-95"
+                className="mx-auto mt-6 flex w-full max-w-6xl items-center justify-center gap-2 rounded-xl bg-[#e0b845] py-3 text-base font-semibold text-[#2b0f40] transition-all duration-300 active:scale-95"
               >
                 <span>Fale conosco</span>
-
-                <div className="w-6 h-6">
-                  <Lottie
-                    key={play ? "play-mobile" : "stop-mobile"}
-                    animationData={sendAnimation}
-                    loop={false}
-                  />
+                <div className="h-5 w-5">
+                  <Lottie key={play ? "play-mobile" : "stop-mobile"} animationData={sendAnimation} loop={false} />
                 </div>
               </a>
             </motion.div>
