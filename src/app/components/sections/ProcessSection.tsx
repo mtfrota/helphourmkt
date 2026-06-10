@@ -2,71 +2,324 @@
 
 import { processContent, processSteps } from "@/app/content/home";
 import { motion } from "framer-motion";
+import { Rocket } from "lucide-react";
+
 import Reveal from "../ui/Reveal";
-import SectionBadge from "../ui/SectionBadge";
 
 export default function ProcessSection() {
   return (
     <section
       id="processo"
-      className="relative overflow-hidden scroll-mt-36 bg-gradient-to-br from-[#4b1772] via-[#5f2391] to-[#4b1772] py-20 text-[var(--text)] md:scroll-mt-28"
+      className="
+        relative
+        isolate
+        overflow-hidden
+        scroll-mt-36
+        bg-[#07010F]
+        py-28
+        text-white
+        md:scroll-mt-28
+      "
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(255,255,255,0.12),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.14),transparent_42%)] opacity-25" />
+      {/* Ambient Glow */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div
+          className="
+            absolute
+            left-[-10%]
+            top-[-10%]
+            h-[420px]
+            w-[420px]
+            rounded-full
+            bg-fuchsia-500/20
+            blur-3xl
+            animate-pulse
+          "
+        />
 
-      <Reveal className="relative mx-auto w-full max-w-6xl px-4 text-center sm:px-6">
-        <SectionBadge className="text-[var(--accent)]">{processContent.badge}</SectionBadge>
-        <h2 className="mt-2 text-3xl font-bold text-white sm:text-4xl">{processContent.title}</h2>
-        <p className="mx-auto mt-3 max-w-3xl text-base text-white/85 sm:text-lg">{processContent.description}</p>
+        <div
+          className="
+            absolute
+            bottom-[-15%]
+            right-[-10%]
+            h-[380px]
+            w-[380px]
+            rounded-full
+            bg-violet-500/20
+            blur-3xl
+          "
+        />
 
-        <div className="pointer-events-none absolute left-1/2 top-[56%] hidden h-[2px] w-[80%] -translate-x-1/2 bg-white/10 md:block">
-          <div className="h-full w-full bg-gradient-to-r from-transparent via-white/70 to-transparent">
-            <div className="animate-line h-full w-full bg-[linear-gradient(90deg,transparent_0%,#e0b845_20%,#e0b845_50%,transparent_80%)] opacity-60" />
-          </div>
+        <div
+          className="
+            absolute
+            left-1/2
+            top-1/2
+            h-[500px]
+            w-[500px]
+            -translate-x-1/2
+            -translate-y-1/2
+            rounded-full
+            bg-purple-500/10
+            blur-3xl
+          "
+        />
+      </div>
+
+      {/* Grid texture */}
+      <div
+        className="
+          absolute
+          inset-0
+          -z-10
+          opacity-[0.03]
+          [background-image:linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)]
+          [background-size:70px_70px]
+        "
+      />
+
+      <Reveal className="relative mx-auto w-full max-w-7xl px-4 sm:px-6">
+        {/* HEADER */}
+        <div className="mx-auto max-w-4xl text-center">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="
+              inline-flex
+              items-center
+              gap-2
+              rounded-full
+              border
+              border-white/10
+              bg-white/[0.03]
+              px-5
+              py-2
+              backdrop-blur-xl
+            "
+          >
+            <Rocket
+              size={15}
+              className="text-[#d8b4fe]"
+              strokeWidth={2.3}
+            />
+
+            <span
+              className="
+                text-sm
+                font-medium
+                tracking-wide
+                text-white/80
+              "
+            >
+              {processContent.badge}
+            </span>
+          </motion.div>
+
+          {/* Title */}
+          <motion.h2
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="
+              mt-8
+              text-4xl
+              font-black
+              leading-[1.05]
+              tracking-tight
+              text-white
+              md:text-6xl
+            "
+          >
+            {processContent.title}
+          </motion.h2>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="
+              mx-auto
+              mt-8
+              max-w-2xl
+              text-lg
+              leading-relaxed
+              text-white/65
+              md:text-xl
+            "
+          >
+            {processContent.description}
+          </motion.p>
         </div>
 
-        <div className="relative mt-12 grid grid-cols-1 gap-6 md:mt-14 md:grid-cols-2 xl:grid-cols-4">
+        {/* PROCESS GRID */}
+        <div
+          className="
+            relative
+            mt-20
+            grid
+            grid-cols-1
+            gap-8
+            md:grid-cols-2
+            xl:grid-cols-4
+          "
+        >
+          {/* Connection line */}
+          <div
+            className="
+              pointer-events-none
+              absolute
+              left-1/2
+              top-14
+              hidden
+              h-px
+              w-[80%]
+              -translate-x-1/2
+              bg-gradient-to-r
+              from-transparent
+              via-fuchsia-400/40
+              to-transparent
+              xl:block
+            "
+          />
+
           {processSteps.map((step, index) => (
             <motion.article
               key={step.title}
-              initial={{ opacity: 0, y: 22 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.55, delay: index * 0.12 }}
-              className="group relative overflow-hidden rounded-[18px] border border-white/28 bg-white/8 p-6 text-center shadow-[0_14px_36px_rgba(0,0,0,0.28)] backdrop-blur-sm transition duration-500 hover:-translate-y-2 hover:border-white/45 hover:shadow-[0_18px_46px_rgba(0,0,0,0.32)] md:text-left"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: 0.7,
+                delay: index * 0.08,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="
+                group
+                relative
+                overflow-hidden
+                rounded-[30px]
+                border
+                border-white/10
+                bg-white/[0.03]
+                p-8
+                text-center
+                backdrop-blur-2xl
+                transition-all
+                duration-500
+                hover:-translate-y-3
+                hover:border-fuchsia-400/30
+                hover:bg-white/[0.05]
+                hover:shadow-[0_0_60px_rgba(168,85,247,0.18)]
+                xl:text-left
+              "
             >
-              <div className="pointer-events-none absolute inset-0 rounded-[18px] opacity-0 transition duration-400 group-hover:opacity-100">
-                <div className="absolute inset-0 rounded-[18px] bg-gradient-to-r from-transparent via-white/10 to-transparent blur-md" />
+              {/* Glow hover */}
+              <div
+                className="
+                  absolute
+                  inset-0
+                  opacity-0
+                  transition-opacity
+                  duration-500
+                  group-hover:opacity-100
+                "
+              >
+                <div
+                  className="
+                    absolute
+                    left-1/2
+                    top-0
+                    h-40
+                    w-40
+                    -translate-x-1/2
+                    rounded-full
+                    bg-fuchsia-500/20
+                    blur-3xl
+                  "
+                />
               </div>
 
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/18 text-lg font-bold text-white transition duration-300 group-hover:scale-110 group-hover:bg-[var(--accent)] group-hover:text-[#2b0f40] md:mx-0">
-                {index + 1}
+              {/* Top line */}
+              <div
+                className="
+                  absolute
+                  inset-x-0
+                  top-0
+                  h-px
+                  bg-gradient-to-r
+                  from-transparent
+                  via-fuchsia-400/60
+                  to-transparent
+                  opacity-0
+                  transition-opacity
+                  duration-500
+                  group-hover:opacity-100
+                "
+              />
+
+              {/* STEP NUMBER */}
+              <div
+                className="
+                  relative
+                  mx-auto
+                  flex
+                  h-16
+                  w-16
+                  items-center
+                  justify-center
+                  rounded-2xl
+                  border
+                  border-white/10
+                  bg-white/[0.05]
+                  text-2xl
+                  font-black
+                  text-[#d8b4fe]
+                  backdrop-blur-xl
+                  transition-all
+                  duration-500
+                  group-hover:scale-110
+                  group-hover:rotate-6
+                  group-hover:shadow-[0_0_30px_rgba(168,85,247,0.35)]
+                  xl:mx-0
+                "
+              >
+                0{index + 1}
               </div>
 
-              <h3 className="font-display text-xl font-extrabold uppercase text-[var(--accent)] transition duration-300 group-hover:translate-x-1">
-                {step.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/85 transition duration-300 group-hover:text-white">
-                {step.text}
-              </p>
+              {/* CONTENT */}
+              <div className="relative mt-8">
+                <h3
+                  className="
+                    text-2xl
+                    font-bold
+                    tracking-tight
+                    text-white
+                  "
+                >
+                  {step.title}
+                </h3>
+
+                <p
+                  className="
+                    mt-4
+                    text-base
+                    leading-relaxed
+                    text-white/65
+                  "
+                >
+                  {step.text}
+                </p>
+              </div>
             </motion.article>
           ))}
         </div>
       </Reveal>
-
-      <style jsx>{`
-        @keyframes lineGrow {
-          from {
-            transform: scaleX(0);
-          }
-          to {
-            transform: scaleX(1);
-          }
-        }
-        .animate-line {
-          transform-origin: left;
-          animation: lineGrow 1.2s ease forwards;
-        }
-      `}</style>
     </section>
   );
 }

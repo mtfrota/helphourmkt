@@ -19,7 +19,7 @@ export default function VideosPage() {
             <h1 className="mt-2 text-3xl font-bold text-brand sm:text-4xl">Vídeos e eventos</h1>
           </div>
           <Link
-            href="/helphour#videos"
+            href="/helphour#hero"
             className="rounded-full border border-brand/45 bg-surface/45 px-5 py-2 text-sm font-semibold text-brand transition hover:bg-surface-2/55"
           >
             Voltar para Home

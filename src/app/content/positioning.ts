@@ -12,7 +12,7 @@ export const positioning = {
   },
   secondaryCta: {
     label: "Nossos serviços",
-    href: "/helphour/servicos",
+    href: "/helphour#servicos",
   },
   hero: {
     headline: "Mais clientes todos os dias para o seu negócio local.",

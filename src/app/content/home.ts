@@ -102,7 +102,7 @@ export const portfolioItems = [
     title: "Tráfego pago",
     result: "+120% leads qualificados",
     metricLabel: "Crescimento comprovado, mais vendas e menos custo.",
-    image: "/portfolio/trafego.jpeg",
+    image: "/portfolio/trafego.png",
   },
   {
     title: "Cobertura de eventos",
@@ -114,13 +114,13 @@ export const portfolioItems = [
     title: "Site institucional",
     result: "+300% conversão",
     metricLabel: "Mais autoridade, mais clareza e mais contatos.",
-    image: "/portfolio/sites.jpeg",
+    image: "/portfolio/sites.png",
   },
   {
     title: "Estratégia social media",
     result: "+90% engajamento",
     metricLabel: "Conteúdo diário estruturado e consistência editorial.",
-    image: "/portfolio/social.png",
+    image: "/portfolio/img.png",
   },
 ];
 
@@ -137,8 +137,8 @@ export const contactContent = {
 };
 
 export const socials = [
-  { label: "Instagram", href: "#" },
-  { label: "Facebook", href: "#" },
-  { label: "YouTube", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/helphourmkt" },
+  { label: "Facebook", href: "https://www.facebook.com/helphourmkt" },
+  { label: "YouTube", href: "https://www.youtube.com/@helphourmkt" },
   { label: "WhatsApp", href: WHATSAPP_URL },
 ];

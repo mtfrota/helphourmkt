@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Work_Sans } from "next/font/google";
-import Footer from "./components/layout/Footer";
-import Navbar from "./components/layout/Navbar";
+import Footer from "./components/footer/Footer";
+import Navbar from "./components/navbar/Navbar";
 import "./globals.css";
 
 const workSans = Work_Sans({

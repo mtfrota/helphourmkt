@@ -3,9 +3,9 @@
 import arrowDown from "@/animations/down_arrow.json";
 import bgAnimation from "@/animations/fundo.json";
 import { aboutContent, aboutHighlights } from "@/app/content/home";
-import { useLottieIntersection } from "@/lib/useLottieIntersection";
+import { useLottieIntersection } from "@/app/lib/useLottieIntersection";
 import Lottie from "lottie-react";
-import { motion } from "framer-motion"; // Adicionado para animações refinadas
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Reveal from "../ui/Reveal";
 import SectionBadge from "../ui/SectionBadge";
@@ -59,7 +59,7 @@ export default function AboutSection() {
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               >
                 <Image
-                  src="/sobre-nos.svg"
+                  src="/sobre-nos.webp"
                   alt="Equipe Help Hour"
                   width={900}
                   height={1100}
