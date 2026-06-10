@@ -300,11 +300,11 @@ function ScoreCard({
         p-6
       "
     >
-    <div classname="mb-4">
+    <div className="mb-4">
       <div className="mb-4 text-sm text-white/40">
         {title}
       </div>
-      <div classname="mt-1 text-xs text-white/30">
+      <div className="mt-1 text-xs text-white/30">
         {description}
       </div>
     </div>
